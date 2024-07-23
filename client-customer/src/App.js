@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <MyProvider>
-        <BrowserRouter>
+        <BrowserRouter >
           <Main />
         </BrowserRouter>
       </MyProvider>

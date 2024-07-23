@@ -1,6 +1,5 @@
 // using withRouter in class-component
-import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from "react-router-dom";
 
 function withRouter(Component) {
   return (props) => (

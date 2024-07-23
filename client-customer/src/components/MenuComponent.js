@@ -15,33 +15,30 @@ class Menu extends Component {
     const cates = this.state.categories.map((item) => {
       return (
         <li key={item._id} className="menu"><Link to={'/product/category/' + item._id}>{item.name}</Link></li>
-        
       );
     });
     return (
       <div className="border-bottom">
         <div className="float-left">
           <ul className="menu">
-          <li className="menu"><Link to='/'>Home</Link></li>
+            <li className="menu">
+              <Link to='/'>Home</Link>
+            </li>
+            <li className="menu">
+              <Link to={'/gmap'}>Gmap</Link>
+            </li>
             {cates}
-          <li className="menu"><link to='/gmap'> Gmap </link> </li>
           </ul>
         </div>
         <div className="float-right">
-        <form className="search">
-        <input type="search" placeholder="Enter keyword" className="keyword" value={this.state.txtKeyword} 
-        onChange={(e) => { this.setState({ txtKeyword: e.target.value }) }} />
-        <input type="submit" value="SEARCH" onClick={(e) => this.btnSearchClick(e)} />
-        </form>
+          <form className="search">
+            <input type="search" placeholder="Enter keyword" className="keyword" value={this.state.txtKeyword} onChange={(e) => { this.setState({ txtKeyword: e.target.value }) }} />
+            <input type="submit" value="SEARCH" onClick={(e) => this.btnSearchClick(e)} />
+          </form>
         </div>
         <div className="float-clear" />
       </div>
     );
-  }
-  // event-handlers
-  btnSearchClick(e) {
-    e.preventDefault();
-    this.props.navigate('/product/search/' + this.state.txtKeyword);
   }
   componentDidMount() {
     this.apiGetCategories();
@@ -52,6 +49,11 @@ class Menu extends Component {
       const result = res.data;
       this.setState({ categories: result });
     });
+  }
+  // event-handlers seach click
+  btnSearchClick(e) {
+    e.preventDefault();
+    this.props.navigate('/product/search/' + this.state.txtKeyword);
   }
 }
 export default withRouter(Menu);

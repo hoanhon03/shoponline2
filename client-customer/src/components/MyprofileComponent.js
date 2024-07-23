@@ -19,7 +19,7 @@ class Myprofile extends Component {
     if (this.context.token === '') return (<Navigate replace to='/login' />);
     return (
       <div className="align-center">
-        <h2 className="text-center">MY PROFILE</h2>
+        <h2 className="text-center">TÀI KHOẢN</h2>
         <form>
           <table className="align-center">
             <tbody>
@@ -63,8 +63,8 @@ class Myprofile extends Component {
         txtEmail: this.context.customer.email
       });
     }
-  }
-  // event-handlers
+  } 
+  // event-handlers update 
   btnUpdateClick(e) {
     e.preventDefault();
     const username = this.state.txtUsername;
@@ -79,7 +79,7 @@ class Myprofile extends Component {
       alert('Please input username and password and name and phone and email');
     }
   }
-  // apis
+  // apis customer
   apiPutCustomer(id, customer) {
     const config = { headers: { 'x-access-token': this.context.token } };
     axios.put('/api/customer/customers/' + id, customer, config).then((res) => {

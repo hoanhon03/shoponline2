@@ -23,7 +23,7 @@ class Order extends Component {
           <td>{item.status}</td>
           <td>
             {item.status === 'PENDING' ?
-              <div><span className="link" onClick={() => this.lnkApproveClick(item._id)}>APPROVE</span> || <span className="link" onClick={() => this.lnkCancelClick(item._id)}>CANCEL</span></div>
+               <div><span className="link" onClick={() => this.lnkApproveClick(item._id)}>APPROVE</span> || <span className="link" onClick={() => this.lnkCancelClick(item._id)}>CANCEL</span></div>
               : <div />}
           </td>
         </tr>
@@ -47,7 +47,7 @@ class Order extends Component {
     return (
       <div>
         <div className="align-center">
-          <h2 className="text-center">ORDER LIST</h2>
+          <h2 className="text-center">DANH SÁCH DƠN HÀNG</h2>
           <table className="datatable" border="1">
             <tbody>
               <tr className="datatable">
@@ -65,7 +65,7 @@ class Order extends Component {
         </div>
         {this.state.order ?
           <div className="align-center">
-            <h2 className="text-center">ORDER DETAIL</h2>
+            <h2 className="text-center">SỐ LƯỢNG SẢN PHẨM</h2>
             <table className="datatable" border="1">
               <tbody>
                 <tr className="datatable">
@@ -85,7 +85,10 @@ class Order extends Component {
       </div>
     );
   }
-  // event-handlers 
+  componentDidMount() {
+    this.apiGetOrders();
+  }
+  // event-handlers
   lnkApproveClick(id) {
     this.apiPutOrderStatus(id, 'APPROVED');
   }
@@ -104,9 +107,6 @@ class Order extends Component {
         alert('SORRY BABY!');
       }
     });
-  }
-  componentDidMount() {
-    this.apiGetOrders();
   }
   // event-handlers
   trItemClick(item) {

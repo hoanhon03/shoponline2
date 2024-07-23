@@ -24,7 +24,7 @@ class Category extends Component {
     return (
       <div>
         <div className="float-left">
-          <h2 className="text-center">CATEGORY LIST</h2>
+          <h2 className="text-center">DANH SÁCH PHÂN LOẠI</h2>
           <table className="datatable" border="1">
             <tbody>
               <tr className="datatable">
@@ -34,10 +34,9 @@ class Category extends Component {
               {cates}
             </tbody>
           </table>
-          <CategoryDetail item={this.state.itemSelected} updateCategories={this.updateCategories} />
         </div>
         <div className="inline" />
-        <CategoryDetail item={this.state.itemSelected} />
+        <CategoryDetail item={this.state.itemSelected} updateCategories={this.updateCategories} />
         <div className="float-clear" />
       </div>
     );

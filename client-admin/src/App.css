@@ -1,14 +1,16 @@
 /* styles.css */
-.body-customer {
-  width: 1150px;
-  height: fit-content;
-  margin: 0px auto;
-}
+
 .body-admin {
   width: fit-content;
   height: fit-content;
   margin: 0px auto;
 }
+
+label{
+  font-size: 1.4rem;
+  color: #fff;
+}
+
 div.inline {
   display: inline-block;
 }
@@ -16,48 +18,123 @@ figure.caption-right {
   display: flex;
   align-items: center;
 }
-.align-center {
-  width: fit-content;
-  margin: 0px auto;
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url("./assets/Mặt\ trời_\ \(4\).jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
-.align-valign-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 0px 20px 20px 20px;
-  border: 1px solid black;
+a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  margin-right: 8px;
+}
+input {
+  outline: none;
+
+  padding: 12px 20px;
+}
+.align-valign-center{
+  display: flex; 
+  box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .5);
+  border-radius: 20px;
+  flex-direction: column;
+
+  overflow: hidden;
+  position: relative;
+  backdrop-filter: blur(20px);
+  width: 420px;
+  padding: 20px;
+}
+
+.align-center {
+  width: 900px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 8px 10px;
+  border: 1px solid #767676;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.05);
+  align-items: center;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.login-btn {
+  padding: 8px 12px;
+  cursor: pointer;
+  border: none;
+  margin-top: 10px;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+.btn-login{
+display: flex;
+justify-content: center;
+
 }
 .text-center {
   text-align: center;
 }
-span.link {
-  cursor: pointer;
-  color: blue;
-  text-decoration: underline;
-}
+
 /* menu.css */
 div.border-bottom {
   border-bottom: 1px solid black;
-  padding: 10px 0px 10px 0px;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-div.float-left {
-  float: left;
+.float-right a {
+  text-decoration: none;
 }
-div.float-right {
-  float: right;
+.float-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 div.float-clear {
   clear: both;
 }
 ul.menu {
-  margin: 0px;
-  padding: 0px;
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  align-items: center;
 }
 li.menu {
   display: inline;
   margin-right: 20px;
   text-transform: uppercase;
+}
+li.menu a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #767676;
+  position: relative;
+}
+li.menu a::after {
+  content: "";
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 4px;
+  background-color: blue;
+}
+li.menu a:hover::after {
+  display: block;
 }
 form.search {
   margin: 0px;
@@ -69,6 +146,7 @@ input.keyword {
 .datatable {
   text-align: center;
   border-collapse: collapse;
+ 
 }
 /* header */
 tr:first-child.datatable {

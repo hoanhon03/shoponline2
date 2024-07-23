@@ -14,13 +14,13 @@ class MyProvider extends Component {
       setCustomer: this.setCustomer,
       setMycart: this.setMycart
     };
-  }
+  }// cart
   setMycart = (value) => {
     this.setState({ mycart: value });
-  }
+  }///token
   setToken = (value) => {
     this.setState({ token: value });
-  }
+  }///customer
   setCustomer = (value) => {
     this.setState({ customer: value });
   }

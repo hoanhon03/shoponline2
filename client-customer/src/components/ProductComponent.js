@@ -22,9 +22,22 @@ class Product extends Component {
       );
     });
     return (
+      
       <div className="text-center">
         <h2 className="text-center">LIST PRODUCTS</h2>
+        <div>
+          <select value={this.state.sort} onChange={(e) => { this.setState({ sort: e.target.value}); this.cmbSortChange(e.target.value); }}>
+            <option value="default">------Sort by------</option>
+            <option value="nameASC">Name (a &#8594; z)</option>
+            <option value="nameDESC">Name (z &#8594; a)</option>
+            <option value="priceASC">Price (low &#8594; high)</option>
+            <option value="priceDESC">Price (high &#8594; low)</option>
+          </select>
+        </div>
+        
+        <div className='align-center-home-page'>
         {prods}
+        </div>
       </div>
     );
   }
@@ -32,31 +45,45 @@ class Product extends Component {
     const params = this.props.params;
     if (params.cid) {
       this.apiGetProductsByCatID(params.cid);
-    }
-    else if (params.keyword) {
-    this.apiGetProductsByKeyword(params.keyword);}
+    }else if (params.keyword) {
+        this.apiGetProductsByKeyword(params.keyword);
+      }
   }
   componentDidUpdate(prevProps) { // changed: /product/...
     const params = this.props.params;
     if (params.cid && params.cid !== prevProps.params.cid) {
       this.apiGetProductsByCatID(params.cid);
-    }
-    else if (params.keyword && params.keyword !== prevProps.params.keyword) {
-        this.apiGetProductsByKeyword(params.keyword);}
+    } else if (params.keyword && params.keyword !== prevProps.params.keyword) {
+        this.apiGetProductsByKeyword(params.keyword);
+      }
   }
-  // apis
+  // apis keyword
   apiGetProductsByKeyword(keyword) {
     axios.get('/api/customer/products/search/' + keyword).then((res) => {
       const result = res.data;
       this.setState({ products: result });
     });
   }
-  // apis
+  // event-handlers
+  cmbSortChange(sort) {
+    if (sort === 'nameASC') {
+      this.state.products.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sort === 'nameDESC') {
+      this.state.products.sort((a, b) => b.name.localeCompare(a.name));
+    } else if (sort === 'priceASC') {
+      this.state.products.sort((a, b) => a.price - b.price);
+    } else if (sort === 'priceDESC') {
+      this.state.products.sort((a, b) => b.price - a.price);
+    }
+  }
+  
+ // apis cid
   apiGetProductsByCatID(cid) {
     axios.get('/api/customer/products/category/' + cid).then((res) => {
       const result = res.data;
       this.setState({ products: result });
     });
   }
+  
 }
 export default withRouter(Product);

@@ -4,7 +4,7 @@ import withRouter from '../utils/withRouter';
 import MyContext from '../contexts/MyContext';
 
 class ProductDetail extends Component {
-  static contextType = MyContext; // using this.context to access global state
+  static contextType = MyContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -58,8 +58,7 @@ class ProductDetail extends Component {
     }
     return (<div />);
   }
-
-  // event-handlers
+  // event-handlers 2cart-click
   btnAdd2CartClick(e) {
     e.preventDefault();
     const product = this.state.product;
@@ -79,7 +78,6 @@ class ProductDetail extends Component {
       alert('Please input quantity');
     }
   }
-
   componentDidMount() {
     const params = this.props.params;
     this.apiGetProduct(params.id);

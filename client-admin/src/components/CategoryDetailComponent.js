@@ -14,7 +14,7 @@ class CategoryDetail extends Component {
   render() {
     return (
       <div className="float-right">
-        <h2 className="text-center">CATEGORY DETAIL</h2>
+        <h2 className="text-center">THÊM LOẠI</h2>
         <form>
           <table>
             <tbody>
@@ -40,22 +40,27 @@ class CategoryDetail extends Component {
       </div>
     );
   }
-  // event-handlers update
-  btnUpdateClick(e) {
+  componentDidUpdate(prevProps) {
+    if (this.props.item !== prevProps.item) {
+      this.setState({ txtID: this.props.item._id, txtName: this.props.item.name });
+    }
+  }
+  // event-handlers delete
+  btnDeleteClick(e) {
     e.preventDefault();
-    const id = this.state.txtID;
-    const name = this.state.txtName;
-    if (id && name) {
-      const cate = { name: name };
-      this.apiPutCategory(id, cate);
-    } else {
-      alert('Please input id and name');
+    if (window.confirm('ARE YOU SURE?')) {
+      const id = this.state.txtID;
+      if (id) {
+        this.apiDeleteCategory(id);
+      } else {
+        alert('Please input id');
+      }
     }
   }
   // apis
-  apiPutCategory(id, cate) {
+  apiDeleteCategory(id) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.put('/api/admin/categories/' + id, cate, config).then((res) => {
+    axios.delete('/api/admin/categories/' + id, config).then((res) => {
       const result = res.data;
       if (result) {
         alert('OK BABY!');
@@ -65,7 +70,7 @@ class CategoryDetail extends Component {
       }
     });
   }
-   // event-handlers add
+     // event-handlers addclick
    btnAddClick(e) {
     e.preventDefault();
     const name = this.state.txtName;
@@ -89,22 +94,29 @@ class CategoryDetail extends Component {
       }
     });
   }
-  // delete
-   btnDeleteClick(e) {
+  apiGetCategories() {
+    const config = { headers: { 'x-access-token': this.context.token } };
+    axios.get('/api/admin/categories', config).then((res) => {
+      const result = res.data;
+      this.props.updateCategories(result);
+    });
+  }
+   // event-handlers updateclick
+   btnUpdateClick(e) {
     e.preventDefault();
-    if (window.confirm('ARE YOU SURE?')) {
-      const id = this.state.txtID;
-      if (id) {
-        this.apiDeleteCategory(id);
-      } else {
-        alert('Please input id');
-      }
+    const id = this.state.txtID;
+    const name = this.state.txtName;
+    if (id && name) {
+      const cate = { name: name };
+      this.apiPutCategory(id, cate);
+    } else {
+      alert('Please input id and name');
     }
   }
-  // apis id
-  apiDeleteCategory(id) {
+  // apis
+  apiPutCategory(id, cate) {
     const config = { headers: { 'x-access-token': this.context.token } };
-    axios.delete('/api/admin/categories/' + id, config).then((res) => {
+    axios.put('/api/admin/categories/' + id, cate, config).then((res) => {
       const result = res.data;
       if (result) {
         alert('OK BABY!');
@@ -113,18 +125,6 @@ class CategoryDetail extends Component {
         alert('SORRY BABY!');
       }
     });
-  }
-  apiGetCategories() {
-    const config = { headers: { 'x-access-token': this.context.token } };
-    axios.get('/api/admin/categories', config).then((res) => {
-      const result = res.data;
-      this.props.updateCategories(result);
-    });
-  }
-  componentDidUpdate(prevProps) {
-    if (this.props.item !== prevProps.item) {
-      this.setState({ txtID: this.props.item._id, txtName: this.props.item.name });
-    }
   }
 }
 export default CategoryDetail;
